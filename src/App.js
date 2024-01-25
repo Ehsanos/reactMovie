@@ -4,6 +4,7 @@ import { Card } from "./components/Card";
 import { Header } from "./components/Header";
 import axios
 from "axios";
+import {Paginate} from "./components/Paginate";
 function App() {
 
 const [movies,setMovies]=useState([])
@@ -21,6 +22,13 @@ const search=async(word)=>{
   const searchResult = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c355b54828379ffd70496e45d1fd90a8&query=${word}`);
   setMovies(searchResult.data.results);
   }
+
+}
+
+const selectMovie=async(number)=>{
+  const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=c355b54828379ffd70496e45d1fd90a8&page=${number}`);
+
+  setMovies(response.data.results);
 
 }
 useEffect(()=>{
@@ -46,7 +54,7 @@ useEffect(()=>{
 
 
 
-
+<Paginate selectMovie={selectMovie}/>
 
       </div>
     </div>
