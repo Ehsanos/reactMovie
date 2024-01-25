@@ -11,7 +11,7 @@ export const Paginate = ({selectMovie}) => {
   return (
     <>
     <ReactPaginate
-      breakLabel="--------"
+      breakLabel="...."
       nextLabel="next >"
       onPageChange={handlePageClick}
       pageRangeDisplayed={2}

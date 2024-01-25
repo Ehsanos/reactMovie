@@ -2,9 +2,13 @@ import {useEffect, useState} from "react";
 import "./App.css";
 import { Card } from "./components/Card";
 import { Header } from "./components/Header";
-import axios
-from "axios";
+import axios from "axios";
 import {Paginate} from "./components/Paginate";
+import {BrowserRouter, Routes ,Route} from "react-router-dom";
+import {CardDatails} from "./components/CardDatails";
+import {CardList} from "./components/CardList";
+
+
 function App() {
 
 const [movies,setMovies]=useState([])
@@ -41,22 +45,22 @@ useEffect(()=>{
         <Header search={search}/>
       </div>
 
-      <div className="main">
-
-{
-
-  movies.map((item,index)=>{
-   return <Card key={index} movie={item} />
-
-  })
-}
+  <div className="main">
 
 
+<BrowserRouter>
+  <Routes>
+    <Route path="/"  element={[<CardList movies={movies}/> , <Paginate selectMovie={selectMovie}/>
+]}/>
+    <Route path="/mov/:id"  element={<CardDatails id={5}/>}/>
+  </Routes>
+</BrowserRouter>
 
 
-<Paginate selectMovie={selectMovie}/>
 
       </div>
+
+
     </div>
   );
 }
